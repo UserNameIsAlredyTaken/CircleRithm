@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using EZCameraShake;
 using ProBuilder2.Common;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,6 +13,7 @@ public class HeroController : MonoBehaviour
     public float _stopSpeed;
     public float _radius;
     public float _lifes = 3;
+    public ParticleSystem _partSys;
 
     private void FixedUpdate()
     {
@@ -40,6 +42,8 @@ public class HeroController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        CameraShaker.Instance.ShakeOnce(4, 4, 0.1f, 1);
+        _partSys.Play();
         Debug.Log("bump");
         if (--_lifes < 0)
         {
